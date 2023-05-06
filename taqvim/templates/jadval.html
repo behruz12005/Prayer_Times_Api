@@ -1,0 +1,127 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.84.0">
+    <title>Uzbekiston bir oy Namoz voqti</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/headers/">
+
+    
+
+    <!-- Bootstrap core CSS -->
+<link rel="stylesheet" href="{% static 'bootstrap.min.css' %}">
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+
+    
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" href="{% static 'headers.css' %}">
+  </head>
+  <body>
+    
+
+<main>
+
+  <div class="container">
+    <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+      <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+        <img src="{% static 'image/logo_namoz.png.png'%}" style="width: 50px; height: 50px;" class="rounded" alt="...">
+        <hr style="width:20px; border:none; background-color:rgb(255, 255, 255);">
+        <span class="fs-4">Uzbekiston Namoz voqti</span>
+      </a>
+
+      <ul class="nav nav-pills">
+        <li class="nav-item"><a href="{% url 'home' %}" class="nav-link active" style="background-color: rgb(255, 255, 255); color: black; font-size: 1rem;"  aria-current="page">Asos</a></li>
+        <li class="nav-item"><a href="{% url 'jadval' %}" class="nav-link" style="background-color: rgb(255, 255, 255); color: black;" >Jadval</a></li>
+        <li class="nav-item"><a href="{% url 'home' %}" class="nav-link" style="background-color: rgb(255, 255, 255); color: black;" >TelegramBot</a></li>
+        <li class="nav-item"><a href="{% url 'home' %}" class="nav-link" style="background-color: rgb(255, 255, 255); color: black;" >Biz haqimizda</a></li>
+      </ul>
+    </header>
+  </div>
+
+  <div class="card text-center">
+    <div class="card-header">
+    {{ today }}  {{ voqt }}     
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">{{shahar.upper }} shahri namoz voqti</h5>
+      <p class="card-text">Siz hoxlagan shahrinigizni tanlab kurishingiz mumkin</p>
+      <form method="post">  
+        {% csrf_token %}
+        <div class="dropdown">
+          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
+            {{shahar}}
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+            <li><button class="dropdown-item" type="submit" name="dropdown-value" value="Toshkent">Toshkent</button></li>
+            <li><button class="dropdown-item" type="submit" name="dropdown-value" value="Samarqand">Samarqand</button></li>
+            <li><button class="dropdown-item" type="submit" name="dropdown-value" value="Buxoro">Buxoro</button></li>
+            <li><button class="dropdown-item" type="submit" name="dropdown-value" value="Andijon">Andijon</button></li>
+            <li><button class="dropdown-item" type="submit" name="dropdown-value" value="Farg'ona">Farg'ona</button></li>
+            <li><button class="dropdown-item" type="submit" name="dropdown-value" value="Namangan">Namangan</button></li>
+            <li><button class="dropdown-item" type="submit" name="dropdown-value" value="Xiva">Xiva</button></li>
+            <li><button class="dropdown-item" type="submit" name="dropdown-value" value="Nukus">Nukus</button></li>
+            <li><button class="dropdown-item" type="submit" name="dropdown-value" value="Qarshi">Qarshi</button></li>
+            <li><button class="dropdown-item" type="submit" name="dropdown-value" value="Navoiy">Navoiy</button></li>
+          </ul>
+        </div>
+      </form>
+    </div>
+    <div class="card-footer text-muted">
+      {{ shahar }}
+    </div>
+  </div>
+  
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Kun</th>
+        <th scope="col">Bomdod</th>
+        <th scope="col">Quyosh</th>
+        <th scope="col">Peshin</th>
+        <th scope="col">Asr</th>
+        <th scope="col">Shom</th>
+        <th scope="col">Xufton</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for oy in oys %}
+        <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ oy.bomdod }}</td>
+            <td>{{ oy.quyosh }}</td>
+            <td>{{ oy.peshin }}</td>
+            <td>{{ oy.asr }}</td>
+            <td>{{ oy.shom }}</td>
+            <td>{{ oy.xufton }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+  </table>
+</main>
+
+
+    <script src="{% static 'bootstrap.bundle.min.js' %}"></script>
+
+      
+  </body>
+</html>
